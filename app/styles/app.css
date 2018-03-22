@@ -1,0 +1,13 @@
+.Completed{
+	border-radius: 5%;
+    padding: 1%;
+    background-color: mediumseagreen;
+    color: white;
+}
+
+.Incomplete{
+	border-radius: 5%;
+    padding: 1%;
+    background-color: palevioletred;
+    color: white;
+}
