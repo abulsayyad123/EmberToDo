@@ -1,13 +1,16 @@
 .Completed{
-	border-radius: 5%;
-    padding: 1%;
+	border-radius: 7%;
+    padding: 5px;
+    font-size: 12px;
     background-color: mediumseagreen;
     color: white;
 }
 
 .Incomplete{
-	border-radius: 5%;
-    padding: 1%;
-    background-color: palevioletred;
+	border-radius: 7%;
+    padding: 5px;
     color: white;
+    background-color: palevioletred;
+    font-size: 12px;
+    cursor: pointer;
 }

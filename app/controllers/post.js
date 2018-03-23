@@ -7,6 +7,12 @@ export default Controller.extend({
 		minutes:''
 	},
 
+	allHours: Ember.computed("model.@each.hours", function(){
+		return this.get('model').getEach('hours').map((item)=> parseInt(item));
+	}),
+
+	sum: Ember.computed.sum('allHours'),
+
 	enableSubmitButton: Ember.computed('title', 'taskTime.hours', 'taskTime.minutes', function(){
 		if(!(this.get('title').length && (this.get('taskTime.hours') > 0 || this.get('taskTime.minutes') > 0 ))){
 			return true;
@@ -15,9 +21,10 @@ export default Controller.extend({
 
 	totalTime: Ember.computed('model.@each.requiredTime', function(){
 		 let totalTime = 0; 
-		 this.get('model').forEach((val)=>{
-		 	 totalTime = totalTime + parseInt(val.get('hours')*60) + parseInt(val.get('minutes'));
-		 });
+		 let sum = Ember.computed.sum(this.get('allHours'));
+		 totalTime = this.get('sum')*60 
+		 				+ this.get('model').getEach('minutes').map((item)=> parseInt(item)).reduce((num1, num2) => num1 + num2, 0);
+
 		 let hours = Math.floor(totalTime/60);
 		 let minutes = totalTime%60;
 		 const requiredTime = hours+' hrs '+minutes +' minutes';
@@ -81,7 +88,5 @@ export default Controller.extend({
 				this.set('taskTime.minutes', remainingMinutes);
 			}
 		}
-
-
 	}
 });

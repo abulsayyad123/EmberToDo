@@ -20,6 +20,7 @@ var Post = DS.Model.extend({
 		return minutes;
   }),
 
+  postComments: DS.hasMany('post_comment')
 
 });
 

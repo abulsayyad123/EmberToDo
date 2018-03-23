@@ -51,9 +51,10 @@
 	      		<td>{{post.id}}</td>
 	      		<td style="text-align:center">{{post.title}}</td>
 	      		<td style="text-align:center"rr>{{post.taskTime}}</td>
-	      		<td><button class={{post.taskStatus}} {{action "markComplete" post}}>{{post.taskStatus}}</button></td>
+	      		<td><span class={{post.taskStatus}} {{action "markComplete" post}}>{{post.taskStatus}}</span></td>
 	      		<td>
-	      			<button class="label label-danger" {{action "removeTask" post}}>Remove</button>
+	      			<span class="label label-danger" {{action "removeTask" post}} style="cursor:pointer;">Remove</span>
+	      			{{#link-to  'post-detail' post.id class="label label-warning"}}Show{{/link-to}}
 	      		</td>
 	      	</tr>
 	      	{{else}}
