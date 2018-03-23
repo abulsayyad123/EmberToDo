@@ -13,10 +13,22 @@ export default Controller.extend({
 		}
 	}),
 
+	totalTime: Ember.computed('model.@each.requiredTime', function(){
+		 let totalTime = 0; 
+		 this.get('model').forEach((val)=>{
+		 	 totalTime = totalTime + parseInt(val.get('hours')*60) + parseInt(val.get('minutes'));
+		 });
+		 let hours = Math.floor(totalTime/60);
+		 let minutes = totalTime%60;
+		 const requiredTime = hours+' hrs '+minutes +' minutes';
+
+		 return requiredTime;
+	}),
+
 	actions:{
 		addTodo(){
 			const title = this.get('title');
-			const hours = this.get('taskTime.hours')? this.get('taskTime.hours'): '0' + ":";
+			const hours = this.get('taskTime.hours')? this.get('taskTime.hours'): '0';
 			const minutes = this.get('taskTime.minutes')? this.get('taskTime.minutes'): '0';
 			const requiredTime = hours+' hrs '+minutes +' minutes';
 			const task = this.get('store').createRecord('post', {
@@ -58,6 +70,16 @@ export default Controller.extend({
 				this.set('model',newModelValue);	
 			}
 			
+		},
+
+		adjustMinutes(){
+			const minutes = this.get('taskTime.minutes');
+			const hours = this.get('taskTime.hours');
+			if(minutes > 59){
+				let remainingMinutes = minutes - 60;
+				this.set('taskTime.hours', hours+1);
+				this.set('taskTime.minutes', remainingMinutes);
+			}
 		}
 
 

@@ -8,7 +8,19 @@ var Post = DS.Model.extend({
 		return this.get('isComplete')? 'Incomplete': 'Completed';
   }),
 
-  taskTime: DS.attr('string')
+  taskTime: DS.attr('string'),
+
+  hours: Ember.computed('taskTime', function () {
+		return this.get('taskTime').split(' hrs')[0];
+  }),
+
+  minutes: Ember.computed('taskTime', function () {
+		const hrs = this.get('taskTime').split('minutes')[0];
+		const minutes = hrs.split('hrs')[1].trim('');
+		return minutes;
+  }),
+
+
 });
 
 Post.reopenClass({

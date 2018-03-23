@@ -5,7 +5,7 @@
   	<form>
   	<div class="form-group">
 		<label>Task</label>
-		{{input placeholder="New Todo..." value=title class="form-control"}}
+		{{input placeholder="New Todo..."  autofocus="true" value=title class="form-control"}}
 	</div>
 	<div class="form-group">
 		<label>Time</label>
@@ -16,7 +16,7 @@
 						{{input min="0" placeholder="Hours" type="number" value=taskTime.hours class="form-control"}}	
 					</div>
 					<div class="col-xs-4">
-						{{input min="0" placeholder="Minutes" max="60" type="number" value=taskTime.minutes class="form-control"}}
+						{{input min="0" placeholder="Minutes" max="60" type="number" value=taskTime.minutes class="form-control" focus-out="adjustMinutes"}}
 					</div>
 				</div>	
 			</div>	
@@ -38,12 +38,19 @@
 	        <th></th>
 	      </tr>
 	    </thead>
+	    {{#if model.length}}
+		    <tfoot>
+			    <tr>
+			      <td colspan="5" style="text-align:right;">Total Time: {{totalTime}}</td>
+			    </tr>
+			</tfoot>
+		{{/if}}	
 	    <tbody>
 	      {{#each model as |post|}}
 	      	<tr>
 	      		<td>{{post.id}}</td>
 	      		<td style="text-align:center">{{post.title}}</td>
-	      		<td style="text-align:center">{{post.taskTime}}</td>
+	      		<td style="text-align:center"rr>{{post.taskTime}}</td>
 	      		<td><button class={{post.taskStatus}} {{action "markComplete" post}}>{{post.taskStatus}}</button></td>
 	      		<td>
 	      			<button class="label label-danger" {{action "removeTask" post}}>Remove</button>
