@@ -7,6 +7,8 @@ export default Controller.extend({
 		minutes:''
 	},
 
+	userTypes: Ember.computed.alias('user-type'),
+
 	allHours: Ember.computed("model.@each.hours", function(){
 		return this.get('model').getEach('hours').map((item)=> parseInt(item));
 	}),
