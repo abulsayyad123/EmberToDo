@@ -4,7 +4,7 @@ var PostComment = DS.Model.extend({
   text: DS.attr('string'),
   postId: DS.attr("number"),
   isEditable: DS.attr('boolean', {defaultValue: false}),
-  post: DS.belongsTo('post')
+  posts: DS.belongsTo('post')
 });
 
 PostComment.reopenClass({

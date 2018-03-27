@@ -1,3 +1,4 @@
+import { empty, sum, and, reads } from '@ember/object/computed';
 import Controller from '@ember/controller';
 
 export default Controller.extend({
@@ -7,7 +8,7 @@ export default Controller.extend({
 		minutes:''
 	},
 
-	userTypes: Ember.computed.alias('user-type'),
+	//userTypes: Ember.computed.alias('user-type'),
 
 	allHours: Ember.computed("model.@each.hours", function(){
 		return this.get('model').getEach('hours').map((item)=> parseInt(item));
@@ -15,11 +16,11 @@ export default Controller.extend({
 
 	sum: Ember.computed.sum('allHours'),
 
-	enableSubmitButton: Ember.computed('title', 'taskTime.hours', 'taskTime.minutes', function(){
-		if(!(this.get('title').length && (this.get('taskTime.hours') > 0 || this.get('taskTime.minutes') > 0 ))){
-			return true;
-		}
-	}),
+	hours: empty('taskTime.hours'),
+	minutes: empty('taskTime.minutes'),
+	titleLength: reads('title.length'),
+
+	enableSubmitButton: and('hours', 'minutes', 'titleLength'),
 
 	totalTime: Ember.computed('model.@each.requiredTime', function(){
 		 let totalTime = 0; 
@@ -41,7 +42,7 @@ export default Controller.extend({
 			const minutes = this.get('taskTime.minutes')? this.get('taskTime.minutes'): '0';
 			const requiredTime = hours+' hrs '+minutes +' minutes';
 			const task = this.get('store').createRecord('post', {
-			  id: this.get('model.length') +1,
+			  //id: this.get('model.length') +1,
 			  title: title,
 			  taskTime: requiredTime
 			});

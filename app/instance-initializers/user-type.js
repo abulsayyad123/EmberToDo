@@ -5,8 +5,8 @@ var UserConfig = Ember.Object.extend({
 });
 
 export function initialize(application) {
-  application.register('userType', UserConfig.userTypes);
-  application.inject('controller', 'userTypes', 'userType');
+  // application.register('userType', UserConfig.userTypes);
+  // application.inject('controller', 'userTypes', 'userType');
 }
 
 export default {

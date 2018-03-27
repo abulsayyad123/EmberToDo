@@ -1,6 +1,4 @@
-// import DS from 'ember-data';
+import FirebaseAdapter from 'emberfire/adapters/firebase';
 
-// export default DS.JSONAPIAdapter.extend({
-// });
-
-export { default } from 'ember-data-fixture-adapter';
+export default FirebaseAdapter.extend({
+});
